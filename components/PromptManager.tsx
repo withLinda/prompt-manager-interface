@@ -677,7 +677,7 @@ export default function PromptManager() {
                         </span>
                         {searchScope === 'all' && 'folderName' in prompt && (
                           <span className="ml-2 text-xs px-2 py-1 rounded inline-block mt-1 sm:mt-0 bg-everforest-orange/20 text-everforest-orange">
-                            📁 {prompt.folderName}
+                            📁 {(prompt as PromptWithFolder).folderName}
                           </span>
                         )}
                       </div>
