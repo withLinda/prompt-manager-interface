@@ -1,4 +1,4 @@
-# Prompt Manager
+# Prompt Manager Interface
 
 A Next.js application for organizing and managing AI prompts in a hierarchical folder structure with import/export capabilities.
 
