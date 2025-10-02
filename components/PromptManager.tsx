@@ -550,10 +550,11 @@ export default function PromptManager() {
                 </div>
                 
                 <textarea
+                  wrap="soft"
                   value={inputText}
                   onChange={(e) => setInputText(e.target.value)}
                   placeholder={`Add prompt to "${currentFolder?.name}"...`}
-                  className="w-full p-3 sm:p-4 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-everforest-aqua/50 backdrop-blur text-sm sm:text-base bg-everforest-bg0/50 text-everforest-fg border border-everforest-grey0/30"
+                  className="w-full p-3 sm:p-4 rounded-lg resize-y whitespace-pre-wrap break-words wrap-anywhere overflow-x-hidden focus:outline-none focus:ring-2 focus:ring-everforest-aqua/50 backdrop-blur text-sm sm:text-base bg-everforest-bg0/50 text-everforest-fg border border-everforest-grey0/30"
                   rows={8}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' && e.ctrlKey) {
@@ -780,9 +781,10 @@ export default function PromptManager() {
                           />
                         </div>
                         <textarea
+                          wrap="soft"
                           value={editText}
                           onChange={(e) => setEditText(e.target.value)}
-                          className="w-full p-4 rounded-lg font-mono text-sm resize-none focus:outline-none focus:ring-2 focus:ring-everforest-grey0/50 bg-everforest-bg0/50 text-everforest-fg border border-everforest-grey0/30"
+                          className="w-full p-4 rounded-lg font-mono text-sm resize-y whitespace-pre-wrap break-words wrap-anywhere overflow-x-hidden focus:outline-none focus:ring-2 focus:ring-everforest-grey0/50 bg-everforest-bg0/50 text-everforest-fg border border-everforest-grey0/30"
                           style={{ minHeight: '100px', height: 'auto' }}
                           rows={Math.max(4, editText.split('\n').length + 1)}
                           autoFocus
@@ -796,7 +798,7 @@ export default function PromptManager() {
                         />
                       </>
                     ) : (
-                      <pre className="p-4 rounded-lg overflow-x-auto whitespace-pre-wrap font-mono text-sm border bg-everforest-bg0/30 text-everforest-fg border-everforest-grey0/20">
+                      <pre className="p-4 rounded-lg overflow-x-hidden whitespace-pre-wrap break-words wrap-anywhere font-mono text-sm border bg-everforest-bg0/30 text-everforest-fg border-everforest-grey0/20">
                         {prompt.text.split(/(\S*\/\S+\.\w+|\b\w+\.\w+\b)/g).map((part, index) => {
                           if (/(\S*\/\S+\.\w+|\b\w+\.\w+\b)/.test(part)) {
                             return (

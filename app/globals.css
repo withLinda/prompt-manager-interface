@@ -30,6 +30,12 @@
     scrollbar-width: thin;
     scrollbar-color: rgba(122, 132, 120, 0.5) rgba(61, 72, 77, 0.3);
   }
+
+  /* Force long tokens/URLs to wrap instead of causing horizontal scroll */
+  .wrap-anywhere {
+    overflow-wrap: anywhere;   /* modern, preferred */
+    word-break: break-word;    /* fallback for older engines */
+  }
 }
 
 /* Prevent layout shift during hydration */
