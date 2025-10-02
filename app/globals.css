@@ -36,6 +36,12 @@
     overflow-wrap: anywhere;   /* modern, preferred */
     word-break: break-word;    /* fallback for older engines */
   }
+
+  /* Keep vertical scrolling, remove horizontal scrolling */
+  .y-auto-x-hidden {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
 }
 
 /* Prevent layout shift during hydration */
