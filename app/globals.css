@@ -3,32 +3,35 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom scrollbar styles */
+/* Custom scrollbar styles for dark theme */
 @layer utilities {
   .custom-scrollbar::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
   }
-  
+
   .custom-scrollbar::-webkit-scrollbar-track {
-    background: rgba(61, 72, 77, 0.3);
-    border-radius: 4px;
+    background: rgba(39, 46, 51, 0.5);
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
   }
-  
+
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: rgba(122, 132, 120, 0.5);
-    border-radius: 4px;
-    transition: background 0.2s;
+    background: linear-gradient(135deg, rgba(131, 192, 146, 0.6), rgba(127, 187, 179, 0.6));
+    border-radius: 8px;
+    border: 2px solid rgba(39, 46, 51, 0.5);
+    transition: all 0.3s ease;
   }
-  
+
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: rgba(122, 132, 120, 0.8);
+    background: linear-gradient(135deg, rgba(131, 192, 146, 0.9), rgba(127, 187, 179, 0.9));
+    box-shadow: 0 0 10px rgba(131, 192, 146, 0.5);
   }
-  
+
   /* Firefox scrollbar */
   .custom-scrollbar {
     scrollbar-width: thin;
-    scrollbar-color: rgba(122, 132, 120, 0.5) rgba(61, 72, 77, 0.3);
+    scrollbar-color: rgba(131, 192, 146, 0.6) rgba(39, 46, 51, 0.5);
   }
 
   /* Force long tokens/URLs to wrap instead of causing horizontal scroll */
@@ -47,10 +50,12 @@
 /* Prevent layout shift during hydration */
 html {
   overflow-y: scroll;
+  background: #1E2326;
 }
 
 body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
+  background: linear-gradient(135deg, #1E2326, #272E33, #2E383C);
 }
