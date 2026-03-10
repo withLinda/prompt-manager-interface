@@ -10,33 +10,20 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Everforest Dark (hard) palette
-        everforest: {
-          bgDim: '#1E2326',
-          bg0: '#272E33',
-          bg1: '#2E383C',
-          bg2: '#374145',
-          bg3: '#414B50',
-          bg4: '#495156',
-          bg5: '#4F5B58',
-          bgVisual: '#4C3743',
-          bgRed: '#493B40',
-          bgYellow: '#45443c',
-          bgGreen: '#3C4841',
-          bgBlue: '#384B55',
-          bgPurple: '#463F48',
-          fg: '#D3C6AA',
-          red: '#E67E80',
-          orange: '#E69875',
-          yellow: '#DBBC7F',
-          green: '#A7C080',
-          aqua: '#83C092',
-          blue: '#7FBBB3',
-          purple: '#D699B6',
-          grey0: '#7A8478',
-          grey1: '#859289',
-          grey2: '#9DA9A0',
-        }
+        canvas: "#f5efe7",
+        mist: "#fbf8f3",
+        ink: "#1f2430",
+        muted: "#6f6a62",
+        line: "#d9ccbc",
+        accent: "#7a6552",
+        accentSoft: "#ece1d6",
+        success: "#2f6b58",
+        danger: "#9b574d",
+        gold: "#b48a56",
+      },
+      fontFamily: {
+        sans: ["var(--font-manrope)", "sans-serif"],
+        display: ["var(--font-cormorant)", "serif"],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -44,6 +31,24 @@ const config: Config = {
       },
       backdropBlur: {
         xs: '2px',
+      },
+      boxShadow: {
+        soft: "0 10px 24px rgba(42, 33, 24, 0.055)",
+        panel: "0 16px 38px rgba(42, 33, 24, 0.075)",
+      },
+      keyframes: {
+        drift: {
+          "0%, 100%": { transform: "translate3d(0, 0, 0)" },
+          "50%": { transform: "translate3d(0, -18px, 0)" },
+        },
+        "drift-reverse": {
+          "0%, 100%": { transform: "translate3d(0, 0, 0)" },
+          "50%": { transform: "translate3d(14px, 10px, 0)" },
+        },
+      },
+      animation: {
+        drift: "drift 12s ease-in-out infinite",
+        "drift-reverse": "drift-reverse 14s ease-in-out infinite",
       },
     },
   },

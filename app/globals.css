@@ -3,59 +3,167 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom scrollbar styles for dark theme */
+@layer base {
+  :root {
+    color-scheme: light;
+    --pm-radius-surface-strong: 18px;
+    --pm-radius-surface: 16px;
+    --pm-radius-nested: 12px;
+    --pm-radius-field: 10px;
+    --pm-radius-button: 10px;
+    --pm-radius-icon: 10px;
+    --pm-radius-badge: 8px;
+  }
+
+  html {
+    overflow-y: scroll;
+    background:
+      radial-gradient(circle at top left, rgba(255, 255, 255, 0.82), transparent 28%),
+      radial-gradient(circle at top right, rgba(222, 228, 238, 0.88), transparent 24%),
+      linear-gradient(180deg, #f8f4ee 0%, #f0e8dc 46%, #e7ddd0 100%);
+  }
+
+  body {
+    min-height: 100vh;
+    margin: 0;
+    color: #1f2430;
+    background:
+      radial-gradient(circle at top left, rgba(255, 255, 255, 0.82), transparent 28%),
+      radial-gradient(circle at top right, rgba(222, 228, 238, 0.88), transparent 24%),
+      linear-gradient(180deg, #f8f4ee 0%, #f0e8dc 46%, #e7ddd0 100%);
+  }
+
+  * {
+    border-color: rgba(159, 143, 123, 0.18);
+  }
+
+  ::selection {
+    background: rgba(122, 101, 82, 0.18);
+    color: #1f2430;
+  }
+}
+
+@layer components {
+  .pm-surface {
+    @apply border shadow-soft backdrop-blur-2xl;
+    background-color: rgba(255, 255, 255, 0.72);
+    border-color: rgba(159, 143, 123, 0.13);
+    border-radius: var(--pm-radius-surface);
+    box-shadow:
+      0 12px 28px rgba(39, 28, 18, 0.055),
+      inset 0 1px 0 rgba(255, 255, 255, 0.74);
+  }
+
+  .pm-surface-strong {
+    @apply border bg-[rgba(255,255,255,0.8)] shadow-panel backdrop-blur-2xl;
+    border-color: rgba(159, 143, 123, 0.14);
+    border-radius: var(--pm-radius-surface-strong);
+    box-shadow:
+      0 16px 38px rgba(39, 28, 18, 0.075),
+      inset 0 1px 0 rgba(255, 255, 255, 0.78);
+  }
+
+  .pm-kicker {
+    @apply text-[11px] font-semibold uppercase tracking-[0.28em] text-muted;
+  }
+
+  .pm-chip {
+    @apply inline-flex items-center gap-2 border border-line/70 px-3 py-1.5 text-sm font-medium text-muted shadow-soft backdrop-blur-xl;
+    background-color: rgba(255, 255, 255, 0.72);
+    border-radius: var(--pm-radius-badge);
+  }
+
+  .pm-field {
+    @apply w-full border bg-[rgba(255,255,255,0.88)] px-4 py-3 text-sm text-ink outline-none transition duration-200 placeholder:text-muted/80 focus:border-[#b6a28d] focus:ring-2 focus:ring-[#b6a28d]/20;
+    border-color: rgba(159, 143, 123, 0.18);
+    border-radius: var(--pm-radius-field);
+  }
+
+  .pm-textarea {
+    @apply pm-field min-h-[240px] resize-y py-4 leading-7;
+  }
+
+  .pm-button-primary {
+    @apply inline-flex items-center gap-2 bg-[#1f2430] px-4 py-[9px] text-sm font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#2b3341] focus:outline-none focus:ring-2 focus:ring-[#1f2430]/20;
+    border-radius: var(--pm-radius-button);
+  }
+
+  .pm-button-secondary {
+    @apply inline-flex items-center gap-2 border px-4 py-[9px] text-sm font-semibold text-ink transition duration-200 hover:-translate-y-0.5 hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#b6a28d]/20;
+    background-color: rgba(255, 255, 255, 0.82);
+    border-color: rgba(159, 143, 123, 0.18);
+    border-radius: var(--pm-radius-button);
+  }
+
+  .pm-icon-button {
+    @apply inline-flex h-9 w-9 items-center justify-center border text-muted transition duration-200 hover:-translate-y-0.5 hover:bg-white hover:text-ink focus:outline-none focus:ring-2 focus:ring-[#b6a28d]/20;
+    background-color: rgba(255, 255, 255, 0.78);
+    border-color: rgba(159, 143, 123, 0.18);
+    border-radius: var(--pm-radius-icon);
+  }
+
+  .pm-tab {
+    @apply px-3 py-1.5 text-sm font-medium text-muted transition duration-200 hover:text-ink;
+    border-radius: var(--pm-radius-button);
+  }
+
+  .pm-tab-active {
+    @apply bg-[#1f2430] text-white;
+    box-shadow: 0 8px 18px rgba(31, 36, 48, 0.13);
+  }
+
+  .pm-clamp-2 {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+}
+
 @layer utilities {
-  .custom-scrollbar::-webkit-scrollbar {
+  .pm-scrollbar::-webkit-scrollbar {
     width: 10px;
     height: 10px;
   }
 
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: rgba(39, 46, 51, 0.5);
-    border-radius: 8px;
-    backdrop-filter: blur(10px);
+  .pm-scrollbar::-webkit-scrollbar-track {
+    background: rgba(245, 239, 230, 0.52);
+    border-radius: 9999px;
   }
 
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: linear-gradient(135deg, rgba(131, 192, 146, 0.6), rgba(127, 187, 179, 0.6));
-    border-radius: 8px;
-    border: 2px solid rgba(39, 46, 51, 0.5);
-    transition: all 0.3s ease;
+  .pm-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(122, 101, 82, 0.34);
+    border-radius: 9999px;
+    border: 2px solid rgba(245, 239, 230, 0.7);
   }
 
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(135deg, rgba(131, 192, 146, 0.9), rgba(127, 187, 179, 0.9));
-    box-shadow: 0 0 10px rgba(131, 192, 146, 0.5);
+  .pm-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(122, 101, 82, 0.52);
   }
 
-  /* Firefox scrollbar */
-  .custom-scrollbar {
+  .pm-scrollbar {
     scrollbar-width: thin;
-    scrollbar-color: rgba(131, 192, 146, 0.6) rgba(39, 46, 51, 0.5);
+    scrollbar-color: rgba(122, 101, 82, 0.38) rgba(245, 239, 230, 0.52);
   }
 
-  /* Force long tokens/URLs to wrap instead of causing horizontal scroll */
   .wrap-anywhere {
-    overflow-wrap: anywhere;   /* modern, preferred */
-    word-break: break-word;    /* fallback for older engines */
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
 
-  /* Keep vertical scrolling, remove horizontal scrolling */
   .y-auto-x-hidden {
     overflow-y: auto;
     overflow-x: hidden;
   }
 }
 
-/* Prevent layout shift during hydration */
-html {
-  overflow-y: scroll;
-  background: #1E2326;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #1E2326, #272E33, #2E383C);
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
