@@ -1,13 +1,19 @@
-import { Menu, PanelLeft, PanelLeftClose } from "lucide-react";
+import { Menu, MoonStar, PanelLeft, PanelLeftClose, SunMedium } from "lucide-react";
 
 interface PromptHeaderProps {
   sidebarVisible: boolean;
+  theme: "dark" | "light";
+  themeReady: boolean;
   onToggleSidebar: () => void;
+  onToggleTheme: () => void;
 }
 
 export function PromptHeader({
   sidebarVisible,
+  theme,
+  themeReady,
   onToggleSidebar,
+  onToggleTheme,
 }: PromptHeaderProps) {
   return (
     <header className="mb-5 flex flex-col gap-5 lg:mb-6 lg:flex-row lg:items-end lg:justify-between">
@@ -32,6 +38,22 @@ export function PromptHeader({
           <p className="mt-3 max-w-2xl text-sm leading-6 text-muted sm:text-base">Write, store, and reuse prompts in one calm workspace.</p>
         </div>
       </div>
+
+      <button
+        type="button"
+        onClick={onToggleTheme}
+        className="pm-button-secondary self-start"
+        aria-label={themeReady ? `Switch to ${theme === "dark" ? "light" : "dark"} theme` : "Switch theme"}
+      >
+        {theme === "dark" ? (
+          <MoonStar className="h-4 w-4 text-accentGold" />
+        ) : (
+          <SunMedium className="h-4 w-4 text-accent" />
+        )}
+        <span className="whitespace-nowrap" suppressHydrationWarning>
+          {themeReady ? `Theme: ${theme === "dark" ? "Dark" : "Light"}` : "Theme"}
+        </span>
+      </button>
     </header>
   );
 }

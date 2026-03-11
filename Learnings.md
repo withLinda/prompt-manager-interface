@@ -29,9 +29,11 @@ update_policy: Read this file at the start of work and append new lessons after 
 - For design-focused work, static checks alone are not enough. Run build/lint and also inspect the rendered page on desktop and mobile.
 - During `next dev`, the built-in Next Dev Tools can surface a `SegmentViewNode` / React Client Manifest error that does not reproduce in production build output. Treat that as a dev-tooling issue first, not an immediate app regression.
 - Playwright MCP creates local `.playwright-cli/` screenshots and logs in this repo. Keep that folder ignored unless a task explicitly asks to commit captured artifacts.
+- If Playwright MCP cannot launch because Chrome is already using the profile, switch to Chrome DevTools MCP for quick UI verification instead of blocking on browser startup.
 
 ## Session Notes
 - 2026-03-11: The redesign became too busy because extra summary UI was added on top of existing navigation stats. Future changes should start from the current app workflow and only add information that has a clear new job.
 - 2026-03-11: After simplifying layout, check desktop whitespace and sidebar truncation again. Removing panels can expose balance problems, and hidden hover actions can still steal width from text if they stay in normal layout flow.
 - 2026-03-11: For this product, avoid oversized 24px-34px bubble corners across productivity surfaces. Prefer a tighter, tiered radius system so the UI stays minimal, elegant, and calm.
 - 2026-03-11: This product looks stronger with crisp minimal radii than soft rounded radii. Start future refinements from the sharper 18/16/12/10/8 scale instead of reintroducing bubble corners.
+- 2026-03-11: Everforest Dark Hard is the preferred dark theme here. Use `#1E2326` as the main canvas, keep the warm orange/salmon/yellow accents dominant, and use the green/teal/purple accents only sparingly.

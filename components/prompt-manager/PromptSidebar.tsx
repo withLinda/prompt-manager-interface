@@ -56,7 +56,7 @@ export function PromptSidebar({
   onDeleteFolder,
 }: PromptSidebarProps) {
   return (
-    <div className="flex h-full w-[88vw] max-w-[320px] flex-col border-r border-line/60 bg-[rgba(250,246,240,0.82)] px-4 py-4 shadow-[0_22px_54px_rgba(43,34,24,0.11)] backdrop-blur-2xl lg:w-[320px]">
+    <div className="flex h-full w-[88vw] max-w-[320px] flex-col border-r border-line/70 bg-surface/92 px-4 py-4 shadow-panel backdrop-blur-2xl lg:w-[320px]">
       <div className="flex items-start justify-between gap-3 border-b border-line/70 pb-5">
         <div>
           <p className="pm-kicker">Workspace</p>
@@ -73,11 +73,11 @@ export function PromptSidebar({
       </div>
 
       <div className="mt-5 grid grid-cols-2 gap-3">
-        <div className="rounded-[12px] border border-line/60 bg-white/80 p-3 shadow-soft">
+        <div className="rounded-[12px] border border-line/60 bg-surfaceStrong/88 p-3 shadow-soft">
           <p className="text-xs uppercase tracking-[0.22em] text-muted">Prompts</p>
           <p className="mt-2 text-2xl font-semibold text-ink">{totalPromptCount}</p>
         </div>
-        <div className="rounded-[12px] border border-line/60 bg-[#fbf8f4] p-3 shadow-soft">
+        <div className="rounded-[12px] border border-line/60 bg-surfaceNested/82 p-3 shadow-soft">
           <p className="text-xs uppercase tracking-[0.22em] text-muted">Folders</p>
           <p className="mt-2 text-2xl font-semibold text-ink">{folders.length}</p>
         </div>
@@ -85,7 +85,7 @@ export function PromptSidebar({
 
       <div className="mt-5">
         {showNewFolder ? (
-          <div className="rounded-[16px] border border-line/60 bg-white/86 p-4 shadow-soft">
+          <div className="rounded-[16px] border border-line/60 bg-surfaceStrong/90 p-4 shadow-soft">
             <label className="block">
               <span className="mb-2 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-muted">
                 <FolderPlus className="h-3.5 w-3.5" />
@@ -128,8 +128,8 @@ export function PromptSidebar({
       <div className="pm-scrollbar mt-5 flex-1 overflow-y-auto pr-1">
         <div className="mb-3 flex items-center justify-between">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-muted">Folders</p>
-          <span className="inline-flex items-center gap-1 rounded-[8px] border border-line/60 bg-white/80 px-2.5 py-1 text-[11px] font-medium text-muted shadow-soft">
-            <Sparkles className="h-3 w-3 text-gold" />
+          <span className="inline-flex items-center gap-1 rounded-[8px] border border-line/60 bg-surfaceStrong/88 px-2.5 py-1 text-[11px] font-medium text-muted shadow-soft">
+            <Sparkles className="h-3 w-3 text-accentGold" />
             Local only
           </span>
         </div>
@@ -142,7 +142,7 @@ export function PromptSidebar({
             return (
               <div key={folder.id} className="rounded-[12px] border border-transparent">
                 {isEditing ? (
-                  <div className="rounded-[16px] border border-line/60 bg-white/86 p-4 shadow-soft">
+                  <div className="rounded-[16px] border border-line/60 bg-surfaceStrong/90 p-4 shadow-soft">
                     <input
                       type="text"
                       value={editFolderName}
@@ -180,8 +180,8 @@ export function PromptSidebar({
                     className={cn(
                       "group relative flex items-center gap-2 rounded-[12px] border p-2 transition-all duration-300",
                       isActive
-                        ? "border-[#cdbdab] bg-white/90 shadow-panel"
-                        : "border-line/50 bg-white/60 shadow-soft hover:border-[#cbbdac] hover:bg-white/75",
+                        ? "border-accent/40 bg-surfaceStrong/95 shadow-panel"
+                        : "border-line/50 bg-surface/68 shadow-soft hover:border-accent/25 hover:bg-surfaceStrong/84",
                     )}
                   >
                     <button
@@ -196,8 +196,8 @@ export function PromptSidebar({
                         className={cn(
                           "mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] border",
                           isActive
-                            ? "border-[#e0d4c7] bg-accentSoft text-accent"
-                            : "border-line/70 bg-white/80 text-muted",
+                            ? "border-accent/35 bg-accent/18 text-accent"
+                            : "border-line/70 bg-surfaceNested/86 text-muted",
                         )}
                       >
                         {isActive ? <FolderOpen className="h-4 w-4" /> : <Folder className="h-4 w-4" />}

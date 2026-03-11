@@ -5,7 +5,7 @@
 
 @layer base {
   :root {
-    color-scheme: light;
+    color-scheme: dark;
     --pm-radius-surface-strong: 18px;
     --pm-radius-surface: 16px;
     --pm-radius-nested: 12px;
@@ -13,54 +13,104 @@
     --pm-radius-button: 10px;
     --pm-radius-icon: 10px;
     --pm-radius-badge: 8px;
+    --pm-canvas: 30 35 38;
+    --pm-surface: 39 46 51;
+    --pm-surface-strong: 65 75 80;
+    --pm-surface-nested: 55 65 69;
+    --pm-surface-subtle: 46 56 60;
+    --pm-ink: 211 198 170;
+    --pm-muted: 157 169 160;
+    --pm-line: 79 91 88;
+    --pm-accent: 230 152 117;
+    --pm-accent-strong: 230 126 128;
+    --pm-accent-gold: 219 188 127;
+    --pm-accent-ink: 30 35 38;
+    --pm-success: 131 192 146;
+    --pm-danger: 230 126 128;
+    --pm-overlay: 18 22 24;
+    --pm-selection: 230 152 117;
+    --pm-selection-ink: 30 35 38;
+    --pm-scroll-track: 39 46 51;
+    --pm-scroll-thumb: 79 91 88;
+    --pm-shadow-soft: 0 14px 32px rgba(0, 0, 0, 0.24);
+    --pm-shadow-panel: 0 22px 54px rgba(0, 0, 0, 0.32);
+    --pm-inset-highlight: inset 0 1px 0 rgba(211, 198, 170, 0.06);
+    --pm-bg-glow-1: rgba(230, 152, 117, 0.16);
+    --pm-bg-glow-2: rgba(230, 126, 128, 0.14);
+    --pm-bg-glow-3: rgba(219, 188, 127, 0.12);
+  }
+
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --pm-canvas: 245 239 231;
+    --pm-surface: 255 255 255;
+    --pm-surface-strong: 251 248 243;
+    --pm-surface-nested: 236 225 214;
+    --pm-surface-subtle: 250 246 240;
+    --pm-ink: 31 36 48;
+    --pm-muted: 111 106 98;
+    --pm-line: 217 204 188;
+    --pm-accent: 230 152 117;
+    --pm-accent-strong: 230 126 128;
+    --pm-accent-gold: 219 188 127;
+    --pm-accent-ink: 31 36 48;
+    --pm-success: 47 107 88;
+    --pm-danger: 155 87 77;
+    --pm-overlay: 23 18 12;
+    --pm-selection: 230 152 117;
+    --pm-selection-ink: 31 36 48;
+    --pm-scroll-track: 245 239 230;
+    --pm-scroll-thumb: 122 101 82;
+    --pm-shadow-soft: 0 12px 28px rgba(39, 28, 18, 0.055);
+    --pm-shadow-panel: 0 16px 38px rgba(39, 28, 18, 0.075);
+    --pm-inset-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    --pm-bg-glow-1: rgba(255, 255, 255, 0.82);
+    --pm-bg-glow-2: rgba(230, 152, 117, 0.12);
+    --pm-bg-glow-3: rgba(219, 188, 127, 0.1);
   }
 
   html {
     overflow-y: scroll;
-    background:
-      radial-gradient(circle at top left, rgba(255, 255, 255, 0.82), transparent 28%),
-      radial-gradient(circle at top right, rgba(222, 228, 238, 0.88), transparent 24%),
-      linear-gradient(180deg, #f8f4ee 0%, #f0e8dc 46%, #e7ddd0 100%);
+    background-color: rgb(var(--pm-canvas));
   }
 
   body {
     min-height: 100vh;
     margin: 0;
-    color: #1f2430;
-    background:
-      radial-gradient(circle at top left, rgba(255, 255, 255, 0.82), transparent 28%),
-      radial-gradient(circle at top right, rgba(222, 228, 238, 0.88), transparent 24%),
-      linear-gradient(180deg, #f8f4ee 0%, #f0e8dc 46%, #e7ddd0 100%);
+    color: rgb(var(--pm-ink));
+    background-color: rgb(var(--pm-canvas));
+    background-image:
+      radial-gradient(circle at top left, var(--pm-bg-glow-1), transparent 28%),
+      radial-gradient(circle at top right, var(--pm-bg-glow-2), transparent 24%),
+      radial-gradient(circle at bottom center, var(--pm-bg-glow-3), transparent 30%);
+    background-attachment: fixed;
   }
 
   * {
-    border-color: rgba(159, 143, 123, 0.18);
+    border-color: rgb(var(--pm-line) / 0.2);
   }
 
   ::selection {
-    background: rgba(122, 101, 82, 0.18);
-    color: #1f2430;
+    background: rgb(var(--pm-selection) / 0.34);
+    color: rgb(var(--pm-selection-ink));
   }
 }
 
 @layer components {
   .pm-surface {
     @apply border shadow-soft backdrop-blur-2xl;
-    background-color: rgba(255, 255, 255, 0.72);
-    border-color: rgba(159, 143, 123, 0.13);
+    background-color: rgb(var(--pm-surface) / 0.84);
+    border-color: rgb(var(--pm-line) / 0.52);
     border-radius: var(--pm-radius-surface);
-    box-shadow:
-      0 12px 28px rgba(39, 28, 18, 0.055),
-      inset 0 1px 0 rgba(255, 255, 255, 0.74);
+    box-shadow: var(--pm-shadow-soft), var(--pm-inset-highlight);
   }
 
   .pm-surface-strong {
-    @apply border bg-[rgba(255,255,255,0.8)] shadow-panel backdrop-blur-2xl;
-    border-color: rgba(159, 143, 123, 0.14);
+    @apply border shadow-panel backdrop-blur-2xl;
+    background-color: rgb(var(--pm-surface-strong) / 0.9);
+    border-color: rgb(var(--pm-line) / 0.56);
     border-radius: var(--pm-radius-surface-strong);
-    box-shadow:
-      0 16px 38px rgba(39, 28, 18, 0.075),
-      inset 0 1px 0 rgba(255, 255, 255, 0.78);
+    box-shadow: var(--pm-shadow-panel), var(--pm-inset-highlight);
   }
 
   .pm-kicker {
@@ -68,14 +118,16 @@
   }
 
   .pm-chip {
-    @apply inline-flex items-center gap-2 border border-line/70 px-3 py-1.5 text-sm font-medium text-muted shadow-soft backdrop-blur-xl;
-    background-color: rgba(255, 255, 255, 0.72);
+    @apply inline-flex items-center gap-2 border px-3 py-1.5 text-sm font-medium text-muted shadow-soft backdrop-blur-xl;
+    background-color: rgb(var(--pm-surface-nested) / 0.8);
+    border-color: rgb(var(--pm-line) / 0.58);
     border-radius: var(--pm-radius-badge);
   }
 
   .pm-field {
-    @apply w-full border bg-[rgba(255,255,255,0.88)] px-4 py-3 text-sm text-ink outline-none transition duration-200 placeholder:text-muted/80 focus:border-[#b6a28d] focus:ring-2 focus:ring-[#b6a28d]/20;
-    border-color: rgba(159, 143, 123, 0.18);
+    @apply w-full border px-4 py-3 text-sm text-ink outline-none transition duration-200 placeholder:text-muted/80 focus:border-accent focus:ring-2 focus:ring-accent/25;
+    background-color: rgb(var(--pm-surface-subtle) / 0.92);
+    border-color: rgb(var(--pm-line) / 0.55);
     border-radius: var(--pm-radius-field);
   }
 
@@ -84,22 +136,31 @@
   }
 
   .pm-button-primary {
-    @apply inline-flex items-center gap-2 bg-[#1f2430] px-4 py-[9px] text-sm font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#2b3341] focus:outline-none focus:ring-2 focus:ring-[#1f2430]/20;
+    @apply inline-flex items-center gap-2 bg-accent px-4 py-[9px] text-sm font-semibold transition duration-200 hover:-translate-y-0.5 hover:bg-accentStrong focus:outline-none focus:ring-2 focus:ring-accent/30;
+    color: rgb(var(--pm-accent-ink));
     border-radius: var(--pm-radius-button);
   }
 
   .pm-button-secondary {
-    @apply inline-flex items-center gap-2 border px-4 py-[9px] text-sm font-semibold text-ink transition duration-200 hover:-translate-y-0.5 hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#b6a28d]/20;
-    background-color: rgba(255, 255, 255, 0.82);
-    border-color: rgba(159, 143, 123, 0.18);
+    @apply inline-flex items-center gap-2 border px-4 py-[9px] text-sm font-semibold text-ink transition duration-200 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-accent/20;
+    background-color: rgb(var(--pm-surface) / 0.86);
+    border-color: rgb(var(--pm-line) / 0.55);
     border-radius: var(--pm-radius-button);
   }
 
+  .pm-button-secondary:hover {
+    background-color: rgb(var(--pm-surface-strong) / 0.95);
+  }
+
   .pm-icon-button {
-    @apply inline-flex h-9 w-9 items-center justify-center border text-muted transition duration-200 hover:-translate-y-0.5 hover:bg-white hover:text-ink focus:outline-none focus:ring-2 focus:ring-[#b6a28d]/20;
-    background-color: rgba(255, 255, 255, 0.78);
-    border-color: rgba(159, 143, 123, 0.18);
+    @apply inline-flex h-9 w-9 items-center justify-center border text-muted transition duration-200 hover:-translate-y-0.5 hover:text-ink focus:outline-none focus:ring-2 focus:ring-accent/20;
+    background-color: rgb(var(--pm-surface) / 0.84);
+    border-color: rgb(var(--pm-line) / 0.55);
     border-radius: var(--pm-radius-icon);
+  }
+
+  .pm-icon-button:hover {
+    background-color: rgb(var(--pm-surface-strong) / 0.95);
   }
 
   .pm-tab {
@@ -108,8 +169,8 @@
   }
 
   .pm-tab-active {
-    @apply bg-[#1f2430] text-white;
-    box-shadow: 0 8px 18px rgba(31, 36, 48, 0.13);
+    @apply bg-accent text-accentInk;
+    box-shadow: 0 10px 24px rgb(var(--pm-accent) / 0.22);
   }
 
   .pm-clamp-2 {
@@ -127,23 +188,23 @@
   }
 
   .pm-scrollbar::-webkit-scrollbar-track {
-    background: rgba(245, 239, 230, 0.52);
+    background: rgb(var(--pm-scroll-track) / 0.68);
     border-radius: 9999px;
   }
 
   .pm-scrollbar::-webkit-scrollbar-thumb {
-    background: rgba(122, 101, 82, 0.34);
+    background: rgb(var(--pm-scroll-thumb) / 0.7);
     border-radius: 9999px;
-    border: 2px solid rgba(245, 239, 230, 0.7);
+    border: 2px solid rgb(var(--pm-scroll-track) / 0.84);
   }
 
   .pm-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: rgba(122, 101, 82, 0.52);
+    background: rgb(var(--pm-accent) / 0.72);
   }
 
   .pm-scrollbar {
     scrollbar-width: thin;
-    scrollbar-color: rgba(122, 101, 82, 0.38) rgba(245, 239, 230, 0.52);
+    scrollbar-color: rgb(var(--pm-scroll-thumb) / 0.72) rgb(var(--pm-scroll-track) / 0.68);
   }
 
   .wrap-anywhere {

@@ -11,6 +11,8 @@ import { PromptSidebar } from "@/components/prompt-manager/PromptSidebar";
 import { PromptCard } from "@/components/prompt-manager/PromptCard";
 import { EmptyPromptState } from "@/components/prompt-manager/EmptyPromptState";
 
+type ThemeMode = "dark" | "light";
+
 const initialFolders: FolderType[] = [
   {
     id: "uncategorized",
@@ -24,6 +26,15 @@ const initialFolders: FolderType[] = [
 export default function PromptManager() {
   const [folders, setFolders] = useLocalStorage<FolderType[]>("prompt-folders", initialFolders);
   const [activeFolder, setActiveFolder] = useLocalStorage<string>("active-folder", "uncategorized");
+  const [theme, setTheme] = useLocalStorage<ThemeMode>("prompt-theme", "dark", {
+    deserializer: (value) => {
+      if (value === '"light"' || value === "light") {
+        return "light";
+      }
+
+      return "dark";
+    },
+  });
   const [draftText, setDraftText] = useState("");
   const [draftFileName, setDraftFileName] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
@@ -40,6 +51,7 @@ export default function PromptManager() {
   const [isDesktop, setIsDesktop] = useState(false);
   const [desktopSidebarOpen, setDesktopSidebarOpen] = useState(true);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [themeReady, setThemeReady] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -59,10 +71,25 @@ export default function PromptManager() {
   }, []);
 
   useEffect(() => {
+    setThemeReady(true);
+  }, []);
+
+  useEffect(() => {
     if (!folders.find((folder) => folder.id === activeFolder)) {
       setActiveFolder("uncategorized");
     }
   }, [folders, activeFolder, setActiveFolder]);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.dataset.theme = theme;
+    root.style.colorScheme = theme;
+
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    if (metaTheme) {
+      metaTheme.setAttribute("content", theme === "light" ? "#f5efe7" : "#1E2326");
+    }
+  }, [theme]);
 
   useEffect(() => {
     if (!mobileSidebarOpen) {
@@ -339,20 +366,23 @@ export default function PromptManager() {
 
   const totalPromptCount = folders.reduce((sum, folder) => sum + folder.prompts.length, 0);
   const sidebarVisible = isDesktop ? desktopSidebarOpen : mobileSidebarOpen;
+  const toggleTheme = () => {
+    setTheme((currentTheme) => (currentTheme === "dark" ? "light" : "dark"));
+  };
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-canvas text-ink">
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute left-[-10rem] top-[-8rem] h-[22rem] w-[22rem] rounded-full bg-white/70 blur-3xl" />
-        <div className="absolute right-[-6rem] top-[10rem] h-[20rem] w-[20rem] rounded-full bg-accentSoft/70 blur-3xl animate-drift" />
-        <div className="absolute bottom-[-7rem] left-[20%] h-[18rem] w-[18rem] rounded-full bg-[#dce4ef]/80 blur-3xl animate-drift-reverse" />
+        <div className="absolute left-[-10rem] top-[-8rem] h-[22rem] w-[22rem] rounded-full bg-accent/20 blur-3xl" />
+        <div className="absolute right-[-6rem] top-[10rem] h-[20rem] w-[20rem] rounded-full bg-accentStrong/16 blur-3xl animate-drift" />
+        <div className="absolute bottom-[-7rem] left-[20%] h-[18rem] w-[18rem] rounded-full bg-accentGold/16 blur-3xl animate-drift-reverse" />
       </div>
 
       {!isDesktop && mobileSidebarOpen && (
         <button
           type="button"
           aria-label="Close sidebar"
-          className="fixed inset-0 z-40 bg-[#17120c]/30 backdrop-blur-sm"
+          className="fixed inset-0 z-40 bg-overlay/72 backdrop-blur-sm"
           onClick={() => setMobileSidebarOpen(false)}
         />
       )}
@@ -417,6 +447,8 @@ export default function PromptManager() {
             <div className="w-full max-w-[1360px]">
               <PromptHeader
                 sidebarVisible={sidebarVisible}
+                theme={theme}
+                themeReady={themeReady}
                 onToggleSidebar={() => {
                   if (isDesktop) {
                     setDesktopSidebarOpen((open) => !open);
@@ -424,6 +456,7 @@ export default function PromptManager() {
                     setMobileSidebarOpen(true);
                   }
                 }}
+                onToggleTheme={toggleTheme}
               />
 
               <PromptComposer
@@ -483,7 +516,7 @@ export default function PromptManager() {
                 )}
               </section>
 
-              <footer className="mt-6 rounded-[16px] border border-line/60 bg-white/70 px-5 py-4 text-sm text-muted shadow-soft backdrop-blur-xl">
+              <footer className="pm-surface mt-6 px-5 py-4 text-sm text-muted">
                 Prompts stay private to this browser session. Export creates a portable JSON backup, and
                 import works with both the current folder-based format and the older flat list.
               </footer>

@@ -17,11 +17,11 @@ export function EmptyPromptState({
 
   return (
     <div className="pm-surface flex flex-col items-center justify-center px-6 py-16 text-center sm:px-10">
-      <div className="inline-flex h-16 w-16 items-center justify-center rounded-full border border-line/70 bg-white/85 shadow-soft">
+      <div className="inline-flex h-16 w-16 items-center justify-center rounded-full border border-line/70 bg-surfaceStrong/88 shadow-soft">
         {searchQuery ? (
-          <SearchX className="h-7 w-7 text-[#5d728d]" />
+          <SearchX className="h-7 w-7 text-accent" />
         ) : (
-          <Sparkles className="h-7 w-7 text-gold" />
+          <Sparkles className="h-7 w-7 text-accentGold" />
         )}
       </div>
       <h3 className="mt-6 text-2xl font-semibold tracking-[-0.03em] text-ink">Nothing here yet</h3>

@@ -42,7 +42,7 @@ export function PromptSearchToolbar({
         </div>
 
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
-          <div className="inline-flex rounded-[12px] border border-line/60 bg-white/75 p-0.5 shadow-soft">
+          <div className="inline-flex rounded-[12px] border border-line/60 bg-surfaceNested/84 p-0.5 shadow-soft">
             <button
               type="button"
               onClick={() => onSearchScopeChange("current")}

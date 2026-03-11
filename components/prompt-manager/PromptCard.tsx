@@ -35,7 +35,7 @@ function renderHighlightedText(text: string) {
   return text.split(splitter).map((part, index) => {
     if (tokenPattern.test(part)) {
       return (
-        <span key={`${part}-${index}`} className="font-semibold text-[#7d6043]">
+        <span key={`${part}-${index}`} className="font-semibold text-accentGold">
           {part}
         </span>
       );
@@ -79,21 +79,21 @@ export function PromptCard({
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
             {prompt.fileName && (
-              <span className="inline-flex items-center gap-2 rounded-[8px] border border-line/60 bg-accentSoft/70 px-3 py-1 text-xs font-medium text-accent">
+              <span className="inline-flex items-center gap-2 rounded-[8px] border border-accent/25 bg-accent/18 px-3 py-1 text-xs font-medium text-accent">
                 <FileText className="h-3.5 w-3.5" />
                 <span className="max-w-[16rem] truncate">{prompt.fileName}</span>
               </span>
             )}
             {searchScope === "all" && isPromptWithFolder(prompt) && (
-              <span className="inline-flex items-center gap-2 rounded-[8px] border border-line/60 bg-white/85 px-3 py-1 text-xs font-medium text-muted">
-                <FolderOpen className="h-3.5 w-3.5 text-[#5d728d]" />
+              <span className="inline-flex items-center gap-2 rounded-[8px] border border-line/60 bg-surfaceStrong/88 px-3 py-1 text-xs font-medium text-muted">
+                <FolderOpen className="h-3.5 w-3.5 text-accentGold" />
                 {prompt.folderName}
               </span>
             )}
-            <span className="rounded-[8px] border border-line/60 bg-white/75 px-3 py-1 text-xs font-medium text-muted">
+            <span className="rounded-[8px] border border-line/60 bg-surfaceNested/78 px-3 py-1 text-xs font-medium text-muted">
               {lineCount} lines
             </span>
-            <span className="rounded-[8px] border border-line/60 bg-white/75 px-3 py-1 text-xs font-medium text-muted">
+            <span className="rounded-[8px] border border-line/60 bg-surfaceNested/78 px-3 py-1 text-xs font-medium text-muted">
               {characterCount} chars
             </span>
           </div>
@@ -193,7 +193,7 @@ export function PromptCard({
         ) : (
           <pre
             className={cn(
-              "overflow-x-auto rounded-[12px] border border-line/60 bg-[rgba(255,255,255,0.64)] p-4 font-mono text-[13px] leading-6 text-[#2c3542] shadow-[inset_0_1px_0_rgba(255,255,255,0.72)] sm:text-sm",
+              "overflow-x-auto rounded-[12px] border border-line/60 bg-surfaceSubtle/92 p-4 font-mono text-[13px] leading-6 text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] sm:text-sm",
               "pm-scrollbar whitespace-pre-wrap break-words",
             )}
           >
